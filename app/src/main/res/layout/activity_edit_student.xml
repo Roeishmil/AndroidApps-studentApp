@@ -5,67 +5,54 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StudentDetailsActivity">
+    tools:context=".EditStudentActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         style="@style/AppToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="Student Details" />
+        app:title="Edit Student" />
 
-    <TextView
-        android:id="@+id/textViewStudentName"
+    <EditText
+        android:id="@+id/editTextStudentName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Name: "
-        android:textSize="18sp"
+        android:hint="Edit Name"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="16dp" />
 
-    <TextView
-        android:id="@+id/textViewStudentId"
+    <EditText
+        android:id="@+id/editTextPhoneNumber"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="ID: "
-        android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/textViewStudentName"
+        android:hint="Edit Phone Number"
+        android:inputType="phone"
+        app:layout_constraintTop_toBottomOf="@id/editTextStudentName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="16dp" />
 
-    <TextView
-        android:id="@+id/phoneNumberTextView"
+    <EditText
+        android:id="@+id/editTextAddress"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Phone Number: "
-        android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/textViewStudentId"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp" />
-
-    <TextView
-        android:id="@+id/addressTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Address: "
-        android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/phoneNumberTextView"
+        android:hint="Edit Address"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@id/editTextPhoneNumber"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="16dp" />
 
     <Button
-        android:id="@+id/buttonEdit"
+        android:id="@+id/buttonSaveStudent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Edit"
-        app:layout_constraintTop_toBottomOf="@id/addressTextView"
+        android:text="Save Changes"
+        app:layout_constraintTop_toBottomOf="@id/editTextAddress"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

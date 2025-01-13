@@ -18,29 +18,26 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // הגדרת ה-Toolbar
         val toolbar: Toolbar = findViewById(R.id.main_toolbar)
         toolbar.setBackgroundColor(Color.parseColor("#333333"))
         setSupportActionBar(toolbar)
 
-        // הגדרת RecyclerView
         val recyclerView: RecyclerView = findViewById(R.id.recyclerViewStudents)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // יצירת Adapter עם נתוני ה-Repository
         adapter = StudentAdapter(StudentRepository.getAllStudents()) { student ->
-            // לחיצה על סטודנט
+            val intent = Intent(this, StudentDetailsActivity::class.java)
+            intent.putExtra("id", student.id)
+            startActivity(intent)
         }
         recyclerView.adapter = adapter
 
-        // כפתור הוספת סטודנט חדש
         val button: Button = findViewById(R.id.buttonNavigate)
         button.setOnClickListener {
             val intent = Intent(this, NewStudent::class.java)
             startActivityForResult(intent, REQUEST_ADD_STUDENT)
         }
 
-        // הוספת נתונים ראשוניים אם הרשימה ריקה
         if (StudentRepository.getAllStudents().isEmpty()) {
             StudentRepository.addStudent(
                 StudentModel("1", "John Doe", "050505050", "Address 1", "https://example.com/avatar1.jpg", false)
@@ -52,7 +49,6 @@ class MainActivity : AppCompatActivity() {
         adapter.notifyDataSetChanged()
     }
 
-    // עדכון הרשימה בעת חזרה ממסך הוספת סטודנט
     override fun onResume() {
         super.onResume()
         adapter.notifyDataSetChanged()

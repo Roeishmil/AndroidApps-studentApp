@@ -13,9 +13,8 @@
         android:theme="@style/Theme.StudentApp"
         tools:targetApi="31">
         <activity android:name=".StudentDetailsActivity" />
-        <activity
-            android:name=".NewStudent"
-            android:exported="false" />
+        <activity android:name=".EditStudentActivity" />
+        <activity android:name=".NewStudent" android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
