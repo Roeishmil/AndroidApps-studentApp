@@ -1,0 +1,7 @@
+<resources>
+    <style name="AppToolbar" parent="Widget.AppCompat.Toolbar">
+        <item name="android:background">?attr/colorPrimary</item>
+        <item name="android:titleTextColor">@android:color/white</item>
+        <item name="android:elevation">4dp</item>
+    </style>
+</resources>

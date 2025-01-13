@@ -1,41 +1,52 @@
 package com.rs.studentapp
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-
 
 class StudentDetailsActivity : AppCompatActivity() {
+
+    private lateinit var studentId: String
+    private lateinit var nameTextView: TextView
+    private lateinit var idTextView: TextView
+    private lateinit var phoneNumberTextView: TextView
+    private lateinit var addressTextView: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_student_details)
 
-        val studentName = intent.getStringExtra("name")
-        val studentId = intent.getStringExtra("id")
-        val studentPhoneNumber = intent.getStringExtra("phoneNumber")
-        val studentAddress = intent.getStringExtra("address")
-        val studentAvatarUrl = intent.getStringExtra("avatarUrl")
+        studentId = intent.getStringExtra("id") ?: return
 
-        val nameTextView: TextView = findViewById(R.id.textViewStudentName)
-        val idTextView: TextView = findViewById(R.id.textViewStudentId)
-        val phoneNumberTextView: TextView = findViewById(R.id.phoneNumberTextView)
-        val addressTextView: TextView = findViewById(R.id.addressTextView)
-        val avatarImageView: ImageView = findViewById(R.id.studentAvatarUrl)
+        nameTextView = findViewById(R.id.textViewStudentName)
+        idTextView = findViewById(R.id.textViewStudentId)
+        phoneNumberTextView = findViewById(R.id.phoneNumberTextView)
+        addressTextView = findViewById(R.id.addressTextView)
 
-        nameTextView.text = "Name: $studentName"
-        idTextView.text = "ID: $studentId"
-        phoneNumberTextView.text = "Phone Number: $studentPhoneNumber"
-        addressTextView.text = "Address: $studentAddress"
-
-        val backButton: Button = findViewById(R.id.buttonBack)
-        backButton.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
+        val editButton: Button = findViewById(R.id.buttonEdit)
+        editButton.setOnClickListener {
+            val intent = Intent(this, EditStudentActivity::class.java)
+            intent.putExtra("id", studentId)
             startActivity(intent)
+        }
+
+        refreshStudentDetails()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        refreshStudentDetails()
+    }
+
+    private fun refreshStudentDetails() {
+        val student = StudentRepository.getAllStudents().find { it.id == studentId }
+        student?.let {
+            nameTextView.text = "Name: ${it.name}"
+            idTextView.text = "ID: ${it.id}"
+            phoneNumberTextView.text = "Phone Number: ${it.phoneNumber}"
+            addressTextView.text = "Address: ${it.address}"
         }
     }
 }
